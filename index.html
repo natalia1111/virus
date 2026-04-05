@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Калькулятор распространения вируса</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    input, button { padding: 8px; margin: 5px; }
+    .result { margin-top: 15px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h2>Модель распространения вируса</h2>
+  <p>Формула: N(t) = N₀ · 2^t, где N₀ = 10</p>
+
+  <label for="days">Введите количество дней (t):</label>
+  <input type="number" id="days" value="5" min="0">
+  <button onclick="calculate()">Рассчитать</button>
+
+  <div class="result" id="output"></div>
+
+  <script>
+    function calculate() {
+      const N0 = 10;
+      const t = parseInt(document.getElementById('days').value);
+      const N = N0 * Math.pow(2, t);
+      document.getElementById('output').innerText =
+        `Через ${t} дней число заражённых: ${N}`;
+    }
+
+    // Автоматический расчёт для примеров
+    window.onload = function() {
+      const examples = [5, 30, 90];
+      let text = "";
+      examples.forEach(t => {
+        const N = 10 * Math.pow(2, t);
+        text += `Через ${t} дней: ${N} заражённых\n`;
+      });
+      document.getElementById('output').innerText = text;
+    }
+  </script>
+</body>
+</html>
